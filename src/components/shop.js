@@ -4,7 +4,6 @@ import ProductCard from './productcard';
 const Shop = () => {
 
     let [ products, setProducts ] = useState(null);
-
     const getProducts = async (url) => {
         let resp = await fetch(url);
         let data = await resp.json();
@@ -18,8 +17,6 @@ const Shop = () => {
 
     return(
         <div className="shop">
-
-            { products && console.log('products are ', products) }
             { products && products.map((prodObject) => {
                 return <ProductCard prodObject={prodObject} key={prodObject.id}/>
             })}

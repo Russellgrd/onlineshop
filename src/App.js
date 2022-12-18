@@ -10,15 +10,18 @@ function App() {
 
   useEffect(() => {
     
-
   },[])
 
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Nav />
-        <Shop />
+        <div className='home'>
+          <Nav />
+          <Shop />
+          <Cart />
+        </div>
+
       </div>
     </BrowserRouter>
   );
