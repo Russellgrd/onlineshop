@@ -2,15 +2,19 @@ import addcart from '../images/addcart.png'
 import UserCart from '../userCart';
 
 const ProductCard = ({prodObject}) => {
-
-
     const handleAddCart = (prodObject) => {
+        let userCart;
         let userCartExists = localStorage.getItem('userCart');
         if(!userCartExists) {
-            let userCart = new UserCart();
+            console.log('no cart in memory --- creating cart');
+            userCart = new UserCart();
+        } else {
+            console.log('cart already in memory --- parsing to object')
+            userCart = JSON.parse(userCartExists);
         }
-
-
+        userCart.items.push(prodObject);
+        localStorage.setItem('userCart', JSON.stringify(userCart));
+        console.log('cart added to localstorage');
     }
 
     return(
