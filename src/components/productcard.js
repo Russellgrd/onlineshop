@@ -1,20 +1,23 @@
 import addcart from '../images/addcart.png'
 import UserCart from '../userCart';
+import { useEffect, useState } from 'react';
+import { checkIfCartExists, parseCartToObject  } from '../helpers';
 
 const ProductCard = ({prodObject}) => {
+
+
+
     const handleAddCart = (prodObject) => {
         let userCart;
-        let userCartExists = localStorage.getItem('userCart');
-        if(!userCartExists) {
-            console.log('no cart in memory --- creating cart');
+        let cartExists = checkIfCartExists();
+        if(!cartExists) {
             userCart = new UserCart();
         } else {
-            console.log('cart already in memory --- parsing to object')
-            userCart = JSON.parse(userCartExists);
+            userCart = parseCartToObject();
         }
         userCart.items.push(prodObject);
         localStorage.setItem('userCart', JSON.stringify(userCart));
-        console.log('cart added to localstorage');
+        
     }
 
     return(

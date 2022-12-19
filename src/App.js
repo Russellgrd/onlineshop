@@ -3,22 +3,17 @@ import { BrowserRouter } from 'react-router-dom';
 import Nav from './components/nav'
 import Shop from './components/shop';
 import Cart from './components/cart';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 
 
 function App() {
-
-  useEffect(() => {
-    
-  },[])
-
 
   return (
     <BrowserRouter>
       <div className="App">
       <Nav />
         <div className='home'>
-          <Shop />
+          <Shop setCartCount={setCartCount} />
           <Cart />
         </div>
 

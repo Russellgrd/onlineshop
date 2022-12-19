@@ -1,45 +1,37 @@
+import { checkIfCartExists, parseCartToObject} from '../helpers';
+import { useEffect, useState } from 'react';
+import CartCard from '../components/cartcard';
 
-import { useEffect, useState } from "react";
-import CartCard from "./cartcard";
 const Cart = () => {
-        
-    let [ cart, setCart ] = useState(null);
-    let [totalPrice, setTotalPrice] = useState(0);
-    let [totalCount, setTotalCount] = useState(0);
 
-        useEffect(() => {
-            let localStorageCart = localStorage.getItem('userCart');
-            let localCartObject;
-            if(localStorageCart) {
-                localCartObject = JSON.parse(localStorageCart);
-                setCart(localCartObject);
-            } else {
-                localCartObject = null;
-                setCart(localCartObject);
-            }
-        },[])
+    let [userCart, setUserCart] = useState(null);
+    let [cartChanged, setCartChanged] = useState(false);
 
-        useEffect(() => {
-            if(cart) {
-                let itemCount = 0;
-                let itemCost = 0
-                cart.items.forEach((item) => {
-                    itemCount ++;
-                    itemCost += item.price;
-                })
-                setTotalPrice(itemCost);
-                setTotalCount(itemCount)
-            }   
-        },[cart]);
+    useEffect(() => {
+        let cartExists = checkIfCartExists();
+        if(cartExists) {
+            setUserCart(parseCartToObject());
+            console.log('cart exists, state set');
+        }
+    },[]);
 
-    return(
-        <div className="cart-container">
-            { totalPrice && <p className="cart-container-totalcost"> { "total £" + totalPrice } </p> }
-            { totalCount && <p className="cart-container-totalcount"> { totalCount + "items in basket" } </p> }
-               {/* { cart && cart.items.map((cartItem) => {
-                    console.log(cartItem);
-                    return <CartCard cartItem={cartItem} />
-               })} */}
+
+    useEffect(() => {
+        const handleStorage = () => {
+            setCartChanged(true);
+            setCartChanged(false);
+            console.log(cartChanged);
+        }
+    
+        window.addEventListener('storage', handleStorage())
+        return () => window.removeEventListener('storage', handleStorage())
+    }, []);
+
+    return (
+        <div className="cart">
+            { userCart && userCart.items.map((item) => {
+                return <CartCard productObject={item} />
+            })}
         </div>
     )
 }
