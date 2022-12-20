@@ -8,3 +8,7 @@ export const parseCartToObject = () => {
     return JSON.parse(cart);
 };
 
+export const localStorageChanged = () => {
+    return true;
+};
+

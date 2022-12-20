@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProductCard from './productcard';
 
-const Shop = () => {
+const Shop = ({setCartChanged, cartChanged}) => {
 
     let [ products, setProducts ] = useState(null);
     const getProducts = async (url) => {
@@ -18,7 +18,7 @@ const Shop = () => {
     return(
         <div className="shop">
             { products && products.map((prodObject) => {
-                return <ProductCard prodObject={prodObject} key={prodObject.id}/>
+                return <ProductCard setCartChanged={setCartChanged} prodObject={prodObject} key={prodObject.id}/>
             })}
         </div>
     )

@@ -3,7 +3,7 @@ import UserCart from '../userCart';
 import { useEffect, useState } from 'react';
 import { checkIfCartExists, parseCartToObject  } from '../helpers';
 
-const ProductCard = ({prodObject}) => {
+const ProductCard = ({prodObject, setCartChanged}) => {
 
 
 
@@ -17,7 +17,7 @@ const ProductCard = ({prodObject}) => {
         }
         userCart.items.push(prodObject);
         localStorage.setItem('userCart', JSON.stringify(userCart));
-        
+        setCartChanged(true);
     }
 
     return(

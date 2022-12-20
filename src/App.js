@@ -8,13 +8,15 @@ import { useEffect,useState } from 'react';
 
 function App() {
 
+  const [cartChanged, setCartChanged] = useState(false);
+
   return (
     <BrowserRouter>
       <div className="App">
       <Nav />
         <div className='home'>
-          <Shop setCartCount={setCartCount} />
-          <Cart />
+          <Shop setCartChanged={setCartChanged} cartChanged={cartChanged}/>
+          <Cart setCartChanged={setCartChanged} cartChanged={cartChanged} />
         </div>
 
       </div>
