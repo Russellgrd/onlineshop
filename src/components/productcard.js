@@ -2,10 +2,9 @@ import addcart from '../images/addcart.png'
 import UserCart from '../userCart';
 import { useEffect, useState } from 'react';
 import { checkIfCartExists, parseCartToObject  } from '../helpers';
+import uuid from 'react-uuid';
 
 const ProductCard = ({prodObject, setCartChanged}) => {
-
-
 
     const handleAddCart = (prodObject) => {
         let userCart;
@@ -15,6 +14,7 @@ const ProductCard = ({prodObject, setCartChanged}) => {
         } else {
             userCart = parseCartToObject();
         }
+        prodObject.cartId = uuid();
         userCart.items.push(prodObject);
         localStorage.setItem('userCart', JSON.stringify(userCart));
         setCartChanged(true);

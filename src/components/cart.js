@@ -2,8 +2,7 @@ import { checkIfCartExists, parseCartToObject} from '../helpers';
 import { useEffect, useState } from 'react';
 import CartCard from '../components/cartcard';
 import uuid from 'react-uuid';
-
-
+import { removeCartItemAndReload } from '../helpers';
 
 const Cart = ({cartChanged, setCartChanged}) => {
 
@@ -18,10 +17,17 @@ const Cart = ({cartChanged, setCartChanged}) => {
         }
     },[cartChanged]);
 
+    const handleDeleteCartItem = (e) => {
+        let itemId = e.parentElement.dataset.cartitemid;
+        console.log('item id to be removed is', itemId);
+        removeCartItemAndReload(itemId);
+        setCartChanged(true);
+    }   
+
     return (
-        <div className="cart">
+        <div className="cart" >
             { userCart && userCart.items.map((item) => {
-                return <CartCard productObject={item} key={uuid()}/>
+                return <CartCard key={uuid()} productObject={item} handleDeleteCartItem={handleDeleteCartItem}/>
             })}
         </div>
     )

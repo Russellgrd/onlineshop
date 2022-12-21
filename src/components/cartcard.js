@@ -1,15 +1,12 @@
-const CartCard = ({productObject}) => { 
+import uuid from 'react-uuid';
 
-    const handleDelete = (item) => {
-        console.log(item.parentElement);
-    }
-
+const CartCard = ({productObject, handleDeleteCartItem}) => { 
     return(
-        <div className="cartcard">
+        <div className="cartcard" key={uuid()} data-cartitemid={productObject.cartId}>
             <h4 className="cartcard-heading">{productObject.name}</h4>
             <img className="cartcard-img" src={productObject.filename} />
             <p className="cartcard-text">{productObject.price}</p>
-            <a onClick={(e) => {handleDelete(e.target)}} className="cartcard-btn" href="#">X</a>
+            <a onClick={(e) => {handleDeleteCartItem(e.target)}} className="cartcard-btn" href="#">X</a>
         </div>
     )
 }

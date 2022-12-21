@@ -1,5 +1,6 @@
 export const checkIfCartExists = () => {
     let cartExists = localStorage.getItem('userCart');
+    console.log('cart exists');
     return cartExists ? true : false;
 };
 
@@ -11,4 +12,21 @@ export const parseCartToObject = () => {
 export const localStorageChanged = () => {
     return true;
 };
+
+export const removeCartItemAndReload = (itemId) => {
+    let cartExists = checkIfCartExists();
+
+    if(cartExists) {
+        console.log('ypphoo');
+       let userCart = JSON.parse(localStorage.getItem('userCart'));
+       let filteredCartItems = userCart.items.filter((item) => {
+        return item.cartId !== itemId;
+       });
+       userCart.items = filteredCartItems;
+       localStorage.setItem('userCart', JSON.stringify(userCart));
+       console.log('item deleted from cart');
+    } else {
+        return null;
+    }
+}
 
