@@ -67,7 +67,7 @@ code {
 }
 
 .shop {
-  outline: 2px solid orange;
+
   width: 70%;
   display: flex;
   flex-direction: row;
@@ -78,7 +78,7 @@ code {
 }
 
 .productCard{
-  outline: 2px solid red;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,7 +119,6 @@ code {
 .cart {
   display: flex;
   flex-direction: column;
-  outline: 2px solid blue;
   align-items: center;
   width: 30%;
   overflow:scroll;
@@ -138,6 +137,17 @@ code {
 .cartcard-img {
   height: 50px;
   width: 50px;
+}
+
+.cartcard-btn {
+  text-align: center;
+  border: 1px solid black;
+  background-color: black;
+  color: #fff;
+  text-decoration: none;
+  height: 1.5rem;
+  width: 50%;
+  margin-bottom: 2px;
 }
 
 
