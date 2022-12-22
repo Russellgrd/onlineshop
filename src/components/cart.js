@@ -27,7 +27,7 @@ const Cart = ({cartChanged, setCartChanged}) => {
             console.log('totalcost is' ,totalCost);
             setUserCartTotalCost(totalCost);
             setUserCartTotalItems(totalItems);
-            setCartChanged(false);
+            // setCartChanged(false);
         }
 
         
@@ -42,7 +42,7 @@ const Cart = ({cartChanged, setCartChanged}) => {
 
     return (
         <div className="cart" >
-            { userCartTotalCost &&  <div>
+            { userCartTotalCost &&  <div className='cart-summary'>
              <p>total cost: £{userCartTotalCost}</p>
              <p>total items: {userCartTotalItems} </p>
             </div>}

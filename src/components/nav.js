@@ -7,16 +7,16 @@ const Nav = () => {
         <div className="nav">
             <ul className="nav_listContainer">
                 <li className="nav_listContainer-item">
-                    <Link to="#"> <img className="logo" src={logo} alt=""/> </Link>
+                    <Link to="/home"> <img className="logo" src={logo} alt=""/> </Link>
                 </li>
                 <li className="nav_listContainer-item">
-                    <Link to="#">shop</Link>
+                    <Link to="#">coming soon</Link>
                 </li>
                 <li className="nav_listContainer-item">
-                    <Link to="#">about</Link>
+                    <Link to="/about">about</Link>
                 </li>
                 <li className="nav_listContainer-item">
-                    <Link to="#"> <img className="logo" src={cart} alt="shopping cart"/> </Link>
+                    <Link to="/cart"> <img className="logo" src={cart} alt="shopping cart"/> </Link>
                 </li>
             </ul>
         </div>
