@@ -1,4 +1,4 @@
-import addcart from '../images/addcart.png'
+import addcart from '../images/add-to-cart.png';
 import UserCart from '../userCart';
 import { useEffect, useState } from 'react';
 import { checkIfCartExists, parseCartToObject  } from '../helpers';
@@ -27,7 +27,7 @@ const ProductCard = ({prodObject, setUserCartChanged}) => {
             <p className="productCard-text">{prodObject.description}</p>
             <p className="productCard-text">{"£" + prodObject.price}</p>
             <p className="productCard-text">{"qty in stock: " +prodObject.quantity}</p>
-            <button onClick={(e) => {handleAddCart(prodObject)}} className="productCard-button"> <img className="productCard-button-img" src={addcart} alt="cart"/> </button>
+            <button onClick={(e) => {handleAddCart(prodObject)}} className="productCard-button"> add to cart </button>
         </div>
     )
 };

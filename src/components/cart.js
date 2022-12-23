@@ -41,10 +41,12 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
 
     return (
         <div className="cart" >
-            <img className='cartlogo' src={cartlogo} />
+            <div className='cart-logo-and-count-box'>
+                <img className='cartlogo' src={cartlogo} />
+                <p className='cartlogo-count'>{userCartTotalItems}</p>
+            </div>
             { userCartTotalCost &&  <div className='cart-summary'>
              <p>total cost: £{userCartTotalCost}</p>
-             <p>total items: {userCartTotalItems} </p>
             </div>}
             { userCart && userCart.items.map((item) => {
                 return <CartCard key={uuid()} productObject={item} handleDeleteCartItem={handleDeleteCartItem}/>
