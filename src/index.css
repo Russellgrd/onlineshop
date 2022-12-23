@@ -150,8 +150,13 @@ code {
   margin-bottom: 2px;
 }
 
+.cartlogo {
+  height: 50px;
+  width: 50px;
+}
+
 .cart-summary {
-  
+
 }
 
 

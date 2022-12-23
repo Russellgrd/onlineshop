@@ -9,10 +9,6 @@ import Home from './components/home';
 
 function App() {
 
-  
-
-  const [cartChanged, setCartChanged] = useState(false);
-
   return (
     <BrowserRouter>
       <div className="App">

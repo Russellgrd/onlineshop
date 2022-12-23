@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { checkIfCartExists, parseCartToObject  } from '../helpers';
 import uuid from 'react-uuid';
 
-const ProductCard = ({prodObject, setCartChanged}) => {
+const ProductCard = ({prodObject, setUserCartChanged}) => {
 
     const handleAddCart = (prodObject) => {
         let userCart;
@@ -17,7 +17,7 @@ const ProductCard = ({prodObject, setCartChanged}) => {
         prodObject.cartId = uuid();
         userCart.items.push(prodObject);
         localStorage.setItem('userCart', JSON.stringify(userCart));
-        setCartChanged(true);
+        setUserCartChanged(true);
     }
 
     return(

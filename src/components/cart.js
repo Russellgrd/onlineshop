@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import CartCard from '../components/cartcard';
 import uuid from 'react-uuid';
 import { removeCartItemAndReload } from '../helpers';
+import cartlogo from '../images/cart.png'
 
-const Cart = ({cartChanged, setCartChanged}) => {
+const Cart = ({setUserCartChanged,userCartChanged}) => {
 
     let [userCart, setUserCart] = useState(null);
     let [userCartTotalCost, setUserCartTotalCost] = useState(0);
@@ -27,21 +28,20 @@ const Cart = ({cartChanged, setCartChanged}) => {
             console.log('totalcost is' ,totalCost);
             setUserCartTotalCost(totalCost);
             setUserCartTotalItems(totalItems);
-            // setCartChanged(false);
         }
-
-        
-    },[cartChanged]);
+        setUserCartChanged(true)
+    },[userCartChanged]);
 
     const handleDeleteCartItem = (e) => {
         let itemId = e.parentElement.dataset.cartitemid;
         console.log('item id to be removed is', itemId);
         removeCartItemAndReload(itemId);
-        setCartChanged(true);
+        setUserCartChanged(true);
     }   
 
     return (
         <div className="cart" >
+            <img className='cartlogo' src={cartlogo} />
             { userCartTotalCost &&  <div className='cart-summary'>
              <p>total cost: £{userCartTotalCost}</p>
              <p>total items: {userCartTotalItems} </p>

@@ -10,13 +10,10 @@ const Nav = () => {
                     <Link to="/home"> <img className="logo" src={logo} alt=""/> </Link>
                 </li>
                 <li className="nav_listContainer-item">
-                    <Link to="#">coming soon</Link>
-                </li>
-                <li className="nav_listContainer-item">
                     <Link to="/about">about</Link>
                 </li>
                 <li className="nav_listContainer-item">
-                    <Link to="/cart"> <img className="logo" src={cart} alt="shopping cart"/> </Link>
+                    <Link to="#">contact</Link>
                 </li>
             </ul>
         </div>
