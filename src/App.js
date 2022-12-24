@@ -6,6 +6,7 @@ import Cart from './components/cart';
 import { useEffect,useState } from 'react';
 import About from './components/about';
 import Home from './components/home';
+import Checkout from './components/checkout';
 
 function App() {
 
@@ -16,6 +17,8 @@ function App() {
           <Routes>
             <Route path="/home" element={ <Home /> } />
             <Route path="/about" element={ <About /> } />
+            <Route path="/checkout" element={ <Checkout /> } />
+            
           </Routes>
       </div>
     </BrowserRouter>

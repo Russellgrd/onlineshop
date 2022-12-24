@@ -23,10 +23,19 @@ export const removeCartItemAndReload = (itemId) => {
         return item.cartId !== itemId;
        });
        userCart.items = filteredCartItems;
+       let totalCost = 0;
+       let totalItems = 0;
+       userCart.items.forEach((item) => {
+          totalCost += item.price;
+          totalItems++;
+       });
+       userCart.totalCost = totalCost;
        localStorage.setItem('userCart', JSON.stringify(userCart));
        console.log('item deleted from cart');
     } else {
         return null;
     }
 }
+
+
 

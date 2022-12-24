@@ -14,8 +14,16 @@ const ProductCard = ({prodObject, setUserCartChanged}) => {
         } else {
             userCart = parseCartToObject();
         }
+        let totalCost = 0;
+        let totalItems = 0;
         prodObject.cartId = uuid();
         userCart.items.push(prodObject);
+        userCart.items.forEach((item) => {
+           console.log(item.price);
+           totalCost += item.price;
+           totalItems++;
+        });
+        userCart.totalCost = totalCost;
         localStorage.setItem('userCart', JSON.stringify(userCart));
         setUserCartChanged(true);
     }

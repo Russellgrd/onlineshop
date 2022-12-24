@@ -4,6 +4,7 @@ import CartCard from '../components/cartcard';
 import uuid from 'react-uuid';
 import { removeCartItemAndReload } from '../helpers';
 import cartlogo from '../images/cart.png'
+import { useNavigate } from 'react-router-dom';
 
 const Cart = ({setUserCartChanged,userCartChanged}) => {
 
@@ -34,16 +35,21 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
 
     const handleDeleteCartItem = (e) => {
         let itemId = e.parentElement.dataset.cartitemid;
-        console.log('item id to be removed is', itemId);
         removeCartItemAndReload(itemId);
         setUserCartChanged(true);
     }   
+
+    const navigate = useNavigate();
+    const handleCheckout = () => {
+        navigate('/checkout');
+    }
 
     return (
         <div className="cart" >
             <div className='cart-logo-and-count-box'>
                 <img className='cartlogo' src={cartlogo} />
                 <p className='cartlogo-count'>{userCartTotalItems}</p>
+                { userCartTotalItems && <button onClick={handleCheckout} className='cart-checkout-button'>checkout</button>}
             </div>
             { userCartTotalCost &&  <div className='cart-summary'>
              <p>total cost: £{userCartTotalCost}</p>
