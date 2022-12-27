@@ -5,6 +5,8 @@ import uuid from 'react-uuid';
 import { removeCartItemAndReload } from '../helpers';
 import cartlogo from '../images/cart.png'
 import { useNavigate } from 'react-router-dom';
+import { Elements } from "@stripe/react-stripe-js";
+
 
 const Cart = ({setUserCartChanged,userCartChanged}) => {
 
@@ -45,19 +47,19 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
     }
 
     return (
-        <div className="cart" >
-            <div className='cart-logo-and-count-box'>
-                <img className='cartlogo' src={cartlogo} />
-                <p className='cartlogo-count'>{userCartTotalItems}</p>
-                { userCartTotalItems && <button onClick={handleCheckout} className='cart-checkout-button'>checkout</button>}
+            <div className="cart" >
+                <div className='cart-logo-and-count-box'>
+                    <img className='cartlogo' src={cartlogo} />
+                    <p className='cartlogo-count'>{userCartTotalItems}</p>
+                    { userCartTotalItems && <button onClick={handleCheckout} className='cart-checkout-button'>checkout</button>}
+                </div>
+                { userCartTotalCost &&  <div className='cart-summary'>
+                <p>total cost: £{userCartTotalCost}</p>
+                </div>}
+                { userCart && userCart.items.map((item) => {
+                    return <CartCard key={uuid()} productObject={item} handleDeleteCartItem={handleDeleteCartItem}/>
+                })}
             </div>
-            { userCartTotalCost &&  <div className='cart-summary'>
-             <p>total cost: £{userCartTotalCost}</p>
-            </div>}
-            { userCart && userCart.items.map((item) => {
-                return <CartCard key={uuid()} productObject={item} handleDeleteCartItem={handleDeleteCartItem}/>
-            })}
-        </div>
     )
 }
 

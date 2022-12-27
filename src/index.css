@@ -207,6 +207,7 @@ code {
 .checkout{
   display: flex;
   flex-direction: row;
+  justify-content: center;
   width: 100vw;
 }
 
@@ -214,57 +215,75 @@ code {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width:60%;
+  width:40%;
   justify-content: center;
   align-items: center;
   outline: 5px solid red;
 }
 
-.checkout-basket-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.checkout-basket-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  outline: 1px solid green;
-}
-
-.checkout-products-container-headings{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  outline: 2px solid purple;
-  width: 100%;
-}
-
-.checkout-payment-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 30%;
-  outline: 1px solid aquamarine;
-}
-
-.checkout-payment-container-button {
-  margin-top: 5px;
-  border: none;
-  background-color: rgba(0, 255, 26, 0.771);
-  height: 2.5rem;
+.checkout-payment-container{
   width: 50%;
 }
 
-.checkout-products-container-amend-button {
-  margin-top: 5px;
-  border: none;
-  background-color: rgba(232, 135, 82, 0.903);
-  height: 2.5rem;
-  width: 30%;
-  margin-bottom: 5px;
+/* stripe styles*/
+
+FormGroup {
+	margin: 0 15px 20px;
+	padding: 0;
+	border-style: none;
+	background-color: #7795f8;
+	will-change: opacity, transform;
+	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #829fff;
+	border-radius: 4px;
 }
+
+.FormRow {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	margin-left: 15px;
+	border-top: 1px solid #819efc;
+}
+
+.StripeElement--webkit-autofill {
+	background: transparent !important;
+}
+
+.StripeElement {
+	width: 100%;
+	padding: 11px 15px 11px 0;
+}
+
+button {
+	display: block;
+	font-size: 16px;
+	width: calc(100% - 30px);
+	height: 40px;
+	margin: 40px 15px 0;
+	background-color: #f6a4eb;
+	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #ffb9f6;
+	border-radius: 4px;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 100ms ease-in-out;
+	will-change: transform, background-color, box-shadow;
+	border: none;
+}
+
+button:active {
+	background-color: #d782d9;
+	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #e298d8;
+	transform: scale(0.99);
+}
+
+
+h1,
+h3 {
+	text-align: center;
+}
+
+/* stripe styles*/
+
+

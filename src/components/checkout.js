@@ -1,6 +1,8 @@
 import { parseCartToObject,checkIfCartExists } from '../helpers';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PaymentForm from './PaymentForm';
+import StripeContainer from './StripeContainer';
 
 const Checkout = () => {
     let [finalSHoppingCart, setFinalShoppingCart] = useState(null);
@@ -44,7 +46,7 @@ const Checkout = () => {
                 </div>
             </div>
             <div className='checkout-payment-container'>
-                <button className='checkout-payment-container-button'>Proceed to payment</button>
+               <StripeContainer />
             </div>
         </div>
     )
