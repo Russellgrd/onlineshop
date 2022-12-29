@@ -7,6 +7,7 @@ import { useEffect,useState } from 'react';
 import About from './components/about';
 import Home from './components/home';
 import Checkout from './components/checkout';
+import UserLogin from './components/userlogin';
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
             <Route path="/home" element={ <Home /> } />
             <Route path="/about" element={ <About /> } />
             <Route path="/checkout" element={ <Checkout /> } />
-            
+            <Route path="/login" element={ <UserLogin /> } />
+
           </Routes>
       </div>
     </BrowserRouter>

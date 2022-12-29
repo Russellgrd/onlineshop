@@ -11,7 +11,7 @@ const Shop = ({setUserCartChanged}) => {
      }
 
     useEffect(() => {
-        getProducts('http://localhost:3001/getproducts');
+        getProducts('http://localhost:4242/getproducts');
     },[]);
 
 
