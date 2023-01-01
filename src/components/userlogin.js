@@ -1,14 +1,20 @@
+import { Link } from "react-router-dom";
 
 const UserLogin = () => {
 
+    const handleLogin = () => {
+
+    }
+
     return(
         <div className="userlogin">
-            <form onSubmit="/userlogin">
-                <label for="email" name="email">email address</label>
+            <form className="userlogin-form" onSubmit="/userlogin">
+                <label htmlFor="email" name="email">email address</label>
                 <input id="email" />
-                <label for="password" name="password">password</label>
+                <label htmlFor="password" name="password">password</label>
                 <input id="password" />
-                <button>login</button>
+                <button onClick={handleLogin}>login</button>
+                <Link to="/createaccount">create an account</Link>
             </form>
         </div>
     )

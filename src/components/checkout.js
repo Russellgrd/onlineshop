@@ -46,6 +46,7 @@ const Checkout = () => {
                 </div>
             </div>
             <div className='checkout-payment-container'>
+                
                <StripeContainer finalSHoppingCart={finalSHoppingCart} />
             </div>
         </div>

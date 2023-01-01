@@ -289,4 +289,22 @@ h3 {
 
 /* stripe styles*/
 
+.userlogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.userlogin-form {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.createaccount-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
