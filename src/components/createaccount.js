@@ -1,5 +1,4 @@
 import { useState } from "react";
-import uuid from 'react-uuid';
 
 const CreateAccount = () => {
     const [ firstname, setFirstName ] = useState('');
@@ -8,6 +7,8 @@ const CreateAccount = () => {
     const [ confirmEmail, setConfirmEmail ] = useState('');
     const [ password, setPassword ] = useState(null);
     const [ confirmPassword, setConfirmPassword ] = useState('');
+
+
 
     const validateEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const validatePassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -34,36 +35,83 @@ const CreateAccount = () => {
             return [isFirstNameValid,isLastNameValid,emailValid,emailMatch,passwordIsValid,passwordMatch]
         }
 
-        console.log('userobject',userObject);
-        console.log(validateUserInformation(userObject));
+        let validaterArray = validateUserInformation(userObject);
         
+        if(!validaterArray.includes(false)) {
+            let resp = await fetch('http://localhost:4242/createnewuser', {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(userObject)
+            })
+            let data = await resp.json();
+            console.log(data);
+        } else {
 
-         let resp = await fetch('http://localhost:4242/createnewuser', {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify(userObject)
-        })
-        let data = await resp.json();
-        console.log(data);
-    };
+        }
+    }
+
 
     return(
         <div className="createaccount">
             <form className="createaccount-form">
                 <label name="firstname" htmlFor="firstname">first name</label>
-                <input onChange={(e) => { setFirstName(e.target.value) }} id="firstname" type="text"/>
+                <input onChange={(e) => { 
+                        setFirstName(e.target.value);
+                            e.target.style.outline = e.target.value.length > 2 ? '2px solid green' : '2px solid orange';
+                        }
+                    } 
+                    id="firstname" type="text"
+                />
+
                 <label name="label" htmlFor="label">last name</label>
-                <input onChange={(e) => { setLastName(e.target.value) }} id="lastname" />
+                <input onChange={(e) => {
+                        setLastName(e.target.value);
+                        e.target.style.outline = e.target.value.length > 2 ? '2px solid green' : '2px solid orange';
+                        }
+                    }
+                    id="lastname" 
+                />
+
                 <label name="email" htmlFor="email">email address</label>
-                <input onChange={(e) => { setEmail(e.target.value) }} id="email" />
+
+                <input onChange={(e) => { 
+                        setEmail(e.target.value);
+                        let validEmail = validateEmail.test(e.target.value);
+                        e.target.style.outline = validEmail ? '2px solid green' : '2px solid orange';
+
+                        }
+                    } 
+                    id="email" 
+                />
+
                 <label name="confirmemail" htmlFor="confirmemail">confirm email</label>
-                <input id="confirmemail" onChange={(e) => { setConfirmEmail(e.target.value) }} />
+                <input id="confirmemail" onChange={(e) => { 
+                        setConfirmEmail(e.target.value);
+                        let validEmail = validateEmail.test(e.target.value);
+                        e.target.style.outline = validEmail && e.target.value === email ? '2px solid green' : '2px solid orange';
+                        }
+                    } 
+                />
                 <label name="password" htmlFor="password">choose a password</label>
-                <input onChange={(e) => { setPassword(e.target.value) }} id="password" type="password" />
+                <input onChange={(e) => { 
+                        setPassword(e.target.value);
+                        let validPassword = validatePassword.test(e.target.value);
+                        e.target.style.outline = validPassword ? '2px solid green' : '2px solid orange';
+                    }
+                    } 
+                    id="password" type="password" 
+                />
                 <label name="confirmpassword" htmlFor="password">confirm password</label>
-                <input onChange={(e) => { setConfirmPassword(e.target.value) }} id="confirmpassword" type="password" />
+                <input onChange={(e) => { 
+                        setConfirmPassword(e.target.value);
+                        let validPassword = validatePassword.test(e.target.value);
+                        e.target.style.outline = validPassword && e.target.value === password ? '2px solid green' : '2px solid orange';
+                        }
+                    } 
+                    id="confirmpassword" type="password" 
+                />
                 <button onClick={(e) => { handleSubmit(e) }}>submit</button>
             </form>
         </div>
