@@ -1,23 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Cookies from 'universal-cookie';
+
 
 const UserLogin = () => {
 
-    const handleLogin = () => {
-
+    let [email, setEmail] = useState(null);
+    let [password, setPassword] = useState(null);
+    let [login, setLogin] = useState(false);
+    const validateEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const navigate = useNavigate();
+    const cookies = new Cookies();
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        let validEmail = validateEmail.test(email);
+        console.log('valid email is', validEmail);
+        if( validEmail && password.length > 5 ){
+            let respObj = await fetch('http://localhost:4242/userlogin', {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({email, password})
+            });
+            let data = await respObj.json();
+            cookies.set('Authorization',`Bearer ${data.jwtToken}`);
+            cookies.set('useremail',`${data.email}`)
+            cookies.set('loggedIn',true);
+            navigate('/home');
+        }
     }
+
+
 
     return(
         <div className="userlogin">
-            <form className="userlogin-form" onSubmit="/userlogin">
+            <form className="userlogin-form">
                 <label htmlFor="email" name="email">email address</label>
-                <input id="email" />
+                <input onChange={(e) => {setEmail(e.target.value)}} id="email" />
                 <label htmlFor="password" name="password">password</label>
-                <input id="password" />
-                <button onClick={handleLogin}>login</button>
+                <input onChange={(e) => {setPassword(e.target.value)}} id="password" />
+                { login || <button onClick={handleLogin}>login</button>}
                 <Link to="/createaccount">create an account</Link>
             </form>
         </div>
     )
 };
+
 
 export default UserLogin;

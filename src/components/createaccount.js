@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CreateAccount = () => {
     const [ firstname, setFirstName ] = useState('');
@@ -8,18 +9,19 @@ const CreateAccount = () => {
     const [ password, setPassword ] = useState(null);
     const [ confirmPassword, setConfirmPassword ] = useState('');
 
-
-
     const validateEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const validatePassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+
+    let navigate = useNavigate();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         let userObject = {
            firstname,
            lastname,
-           email,
-           confirmEmail,
+           email:String(email),
+           confirmEmail:String(confirmEmail),
            datejoined:new Date().toLocaleDateString(),
            password,
            confirmPassword
@@ -36,7 +38,8 @@ const CreateAccount = () => {
         }
 
         let validaterArray = validateUserInformation(userObject);
-        
+
+
         if(!validaterArray.includes(false)) {
             let resp = await fetch('http://localhost:4242/createnewuser', {
                 method:'POST',
@@ -46,15 +49,22 @@ const CreateAccount = () => {
                 body:JSON.stringify(userObject)
             })
             let data = await resp.json();
-            console.log(data);
+            document.querySelector('.createaccount-popup').textContent = data.message;  
+            setTimeout(() => {
+                navigate('/login');
+            },1500)
+
         } else {
 
+            document.querySelector('.createaccount-popup').textContent = "form details incorrect, please review form rules"  
+            return; 
         }
     }
 
 
     return(
         <div className="createaccount">
+            <p className="createaccount-popup"></p>
             <form className="createaccount-form">
                 <label name="firstname" htmlFor="firstname">first name</label>
                 <input onChange={(e) => { 
@@ -114,6 +124,19 @@ const CreateAccount = () => {
                 />
                 <button onClick={(e) => { handleSubmit(e) }}>submit</button>
             </form>
+
+            <div className="createaccount-formrules">
+                <h4>Form Rules</h4>
+                    <p className="createaccount-formrules-text">
+                        first and last name cannot be less that 3 characters
+                    </p>
+                    <p className="createaccount-formrules-text">
+                        email address should be valid and match each other
+                    </p>
+                    <p className="createaccount-formrules-text">
+                        password should have atleast 1 special character and be between 6 and 16 characters in length
+                    </p>
+            </div>
         </div>
     )
 };

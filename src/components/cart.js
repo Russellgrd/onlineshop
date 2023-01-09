@@ -19,7 +19,6 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
         if(cartExists) {
             let userCart = parseCartToObject();
             setUserCart(userCart);
-            console.log('cart exists, state set');
             let totalCost = 0;
             let totalItems = 0;
             console.log(userCart);
@@ -43,7 +42,7 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
 
     const navigate = useNavigate();
     const handleCheckout = () => {
-        navigate('/checkout');
+        
     }
 
     return (
