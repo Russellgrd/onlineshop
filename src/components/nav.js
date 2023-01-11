@@ -8,24 +8,22 @@ import Cookies from 'universal-cookie';
 const Nav = () => {
 
     let [userloggedIn, setUserLoggedIn] = useState(false);
+    let [useremail, setUserEmail] = useState('');
     const cookies = new Cookies();
 
+    let loggedIn = cookies.get('loggedIn');
+    let email = cookies.get('useremail');
+
     useEffect(() => {
-        let loggedIn = cookies.get('loggedIn');
         setUserLoggedIn(loggedIn);
+        setUserEmail(email);
     },[]);
 
     const handleLogOff = () => {
-        cookies.set('loggedIn',false);
-        setUserLoggedIn(false);
-        cookies.set("Authorization", 0, {
-            path: "/",
-            maxAge: 1
-        });
-        cookies.set("useremail", 0, {
-            path: "/",
-            maxAge: 1
-        });
+        setUserEmail('');
+        cookies.remove('Authorization');
+        cookies.remove('useremail');
+        cookies.remove('logginIN')
     }
         
     return(
@@ -40,9 +38,10 @@ const Nav = () => {
                 <li className="nav_listContainer-item">
                     <Link to="/contact">contact</Link>
                 </li>
-                
-                { userloggedIn ? <Link onClick={handleLogOff} to="#">log off</Link> : <Link to="/login">log in</Link>  }
-
+                <li>
+                { useremail ? <Link onClick={handleLogOff} to="#">log off</Link> : <Link to="/login">log in</Link>  }
+                </li>
+                <li> {useremail} </li>
             </ul>
         </div>
     )

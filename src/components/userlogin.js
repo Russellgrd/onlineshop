@@ -14,7 +14,6 @@ const UserLogin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         let validEmail = validateEmail.test(email);
-        console.log('valid email is', validEmail);
         if( validEmail && password.length > 5 ){
             let respObj = await fetch('http://localhost:4242/userlogin', {
                 method:'POST',
@@ -26,8 +25,9 @@ const UserLogin = () => {
             let data = await respObj.json();
             cookies.set('Authorization',`Bearer ${data.jwtToken}`);
             cookies.set('useremail',`${data.email}`)
-            cookies.set('loggedIn',true);
             navigate('/home');
+        } else {
+            document.querySelector('.userlogin-validation-message').textContent = "Please enter a valid email and password"
         }
     }
 
@@ -35,6 +35,7 @@ const UserLogin = () => {
 
     return(
         <div className="userlogin">
+            <p className="userlogin-validation-message"></p>
             <form className="userlogin-form">
                 <label htmlFor="email" name="email">email address</label>
                 <input onChange={(e) => {setEmail(e.target.value)}} id="email" />

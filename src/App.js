@@ -9,6 +9,7 @@ import Home from './components/home';
 import Checkout from './components/checkout';
 import UserLogin from './components/userlogin';
 import CreateAccount from './components/createaccount';
+import Completion from './components/completion';
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
             <Route path="/about" element={ <About /> } />
             <Route path="/login" element={ <UserLogin /> } />
             <Route path="/createaccount" element={ <CreateAccount /> } />
+            <Route path='/checkout' element={ <Checkout /> } />
+            <Route path="/completion" element={ <Completion /> } />
           </Routes>
       </div>
     </BrowserRouter>

@@ -30,6 +30,11 @@ function PaymentForm({finalSHoppingCart}) {
 
     const handleSubmit  = async (e) => {
         e.preventDefault();
+
+        if(!stripe && !elements) {
+            return;
+        }
+
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type:"card",
             card: elements.getElement(CardElement)

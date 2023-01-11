@@ -4,8 +4,11 @@ import CartCard from '../components/cartcard';
 import uuid from 'react-uuid';
 import { removeCartItemAndReload } from '../helpers';
 import cartlogo from '../images/cart.png'
-import { useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 import { Elements } from "@stripe/react-stripe-js";
+import PaymentForm from './PaymentForm';
+import Cookies from 'universal-cookie';
+
 
 
 const Cart = ({setUserCartChanged,userCartChanged}) => {
@@ -13,6 +16,9 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
     let [userCart, setUserCart] = useState(null);
     let [userCartTotalCost, setUserCartTotalCost] = useState(0);
     let [userCartTotalItems, setUserCartTotalItems] = useState(0);
+
+    let cookies = new Cookies();
+
 
     useEffect(() => {
         let cartExists = checkIfCartExists();
@@ -41,16 +47,23 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
     }   
 
     const navigate = useNavigate();
+
     const handleCheckout = () => {
-        
-    }
+        let useremail = cookies.get('useremail');
+            if(!useremail) {
+                navigate('/login');
+            } else {
+                navigate('/checkout',{state:{userCart}});
+            }
+        }
+    
 
     return (
             <div className="cart" >
                 <div className='cart-logo-and-count-box'>
                     <img className='cartlogo' src={cartlogo} />
                     <p className='cartlogo-count'>{userCartTotalItems}</p>
-                    { userCartTotalItems && <button onClick={handleCheckout} className='cart-checkout-button'>checkout</button>}
+                    { userCartTotalItems && <button onClick={handleCheckout} className='cart-checkout-button'>proceed to payment</button>}
                 </div>
                 { userCartTotalCost &&  <div className='cart-summary'>
                 <p>total cost: £{userCartTotalCost}</p>
@@ -58,6 +71,7 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
                 { userCart && userCart.items.map((item) => {
                     return <CartCard key={uuid()} productObject={item} handleDeleteCartItem={handleDeleteCartItem}/>
                 })}
+                
             </div>
     )
 }
