@@ -27,13 +27,10 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
             setUserCart(userCart);
             let totalCost = 0;
             let totalItems = 0;
-            console.log(userCart);
             userCart.items.forEach((item) => {
-               console.log(item.price);
                totalCost += item.price;
                totalItems++;
             });
-            console.log('totalcost is' ,totalCost);
             setUserCartTotalCost(totalCost);
             setUserCartTotalItems(totalItems);
         }
@@ -53,6 +50,10 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
             if(!useremail) {
                 navigate('/login');
             } else {
+                userCart.orderId = uuid();
+                userCart.date = new Date().toLocaleDateString();
+                userCart.time = new Date().toLocaleTimeString();
+                localStorage.setItem('userCart', JSON.stringify(userCart));
                 navigate('/checkout',{state:{userCart}});
             }
         }

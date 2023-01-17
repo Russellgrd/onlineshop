@@ -2,13 +2,13 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import CheckoutForm from "./checkoutForm";
 import { Elements } from "@stripe/react-stripe-js";
+import AddressForm from "./addressform";
 
 
-const Payment = () => {
+const Payment = ({userCartDetails}) => {
 
     const [ stripePromise, setStripePromise ] = useState(null);
     const [clientSecret, setClientSecret] = useState("");
-
     useEffect(() =>{
         fetch('http://localhost:4242/config')
         .then(resp => resp.json())
@@ -26,7 +26,7 @@ const Payment = () => {
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({})
+            body:JSON.stringify({userCartDetails: userCartDetails})
         })
         .then(resp => resp.json())
         .then((data) => {
@@ -39,6 +39,7 @@ const Payment = () => {
            <h1>React stripe and payment element</h1> 
        { stripePromise && clientSecret && (
             <Elements stripe={stripePromise} options={{ clientSecret }}>
+            <AddressForm />
             <CheckoutForm />
            </Elements>
        )}

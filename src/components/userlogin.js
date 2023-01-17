@@ -25,7 +25,7 @@ const UserLogin = () => {
             let data = await respObj.json();
             cookies.set('Authorization',`Bearer ${data.jwtToken}`);
             cookies.set('useremail',`${data.email}`)
-            navigate('/home');
+            navigate('/');
         } else {
             document.querySelector('.userlogin-validation-message').textContent = "Please enter a valid email and password"
         }

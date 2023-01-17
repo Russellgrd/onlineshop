@@ -8,22 +8,25 @@ const CheckoutForm = () => {
     const elements = useElements();
     const [message, setMessage] = useState(null);
     const [isProcessing, setIsProcessing] = useState(null);
+    
 
     const handleSubmit = async (e) => {
-        e.preventDefault();        
-        setIsProcessing(true);
-        const { error } = await stripe.confirmPayment({
-            elements,
-            confirmParams:{
-                return_url: `${window.location.origin}/completion`,
-            }
-        });
+        e.preventDefault();     
+        
 
-        if (error) {
-            setMessage(error.message);
-            console.log(error);
-        };
-        setIsProcessing(false);
+        // setIsProcessing(true);
+        // const { error } = await stripe.confirmPayment({
+        //     elements,
+        //     confirmParams:{
+        //         return_url: `${window.location.origin}/completion`,
+        //     }
+        // });
+
+        // if (error) {
+        //     setMessage(error.message);
+        //     console.log(error);
+        // };
+        // setIsProcessing(false);
     }
 
     return(

@@ -30,7 +30,7 @@ const Nav = () => {
         <div className="nav">
             <ul className="nav_listContainer">
                 <li className="nav_listContainer-item">
-                    <Link to="/home"> <img className="logo" src={logo} alt=""/> </Link>
+                    <Link to="/"> <img className="logo" src={logo} alt=""/> </Link>
                 </li>
                 <li className="nav_listContainer-item">
                     <Link to="/about">about</Link>

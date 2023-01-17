@@ -11,9 +11,9 @@ const Checkout = () => {
         <div>
             <h1>checkout</h1>
             <p>total to pay £{location.state.userCart.totalCost}</p>
-            <Link to="/home">back to basket</Link>
+            <Link to="/">back to basket</Link>
+            <Payment userCartDetails={location.state.userCart} />
             
-            <Payment />
         </div>
     )
 };
