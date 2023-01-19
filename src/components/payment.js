@@ -36,7 +36,7 @@ const Payment = ({userCartDetails}) => {
 
     return(
         <div>
-           <h1>React stripe and payment element</h1> 
+            
        { stripePromise && clientSecret && (
             <Elements stripe={stripePromise} options={{ clientSecret }}>
             <AddressForm />

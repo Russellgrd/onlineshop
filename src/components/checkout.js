@@ -8,10 +8,10 @@ const Checkout = () => {
     console.log(location.state);
 
     return(
-        <div>
+        <div className='checkout'>
             <h1>checkout</h1>
             <p>total to pay £{location.state.userCart.totalCost}</p>
-            <Link to="/">back to basket</Link>
+            <Link className='checkout-btn' to="/">back to basket</Link>
             <Payment userCartDetails={location.state.userCart} />
             
         </div>

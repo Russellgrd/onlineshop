@@ -38,10 +38,10 @@ const Nav = () => {
                 <li className="nav_listContainer-item">
                     <Link to="/contact">contact</Link>
                 </li>
-                <li>
-                { useremail ? <Link onClick={handleLogOff} to="#">log off</Link> : <Link to="/login">log in</Link>  }
+                <li className="nav_listContainer-item">
+                { useremail ? <Link className='nav-listContainer-logoff' onClick={handleLogOff} to="#">log off</Link> : <Link to="/login">log in</Link>  }
                 </li>
-                <li> {useremail} </li>
+                <li className="nav_listContainer-item  nav_listContainer-email"> {useremail} </li>
             </ul>
         </div>
     )

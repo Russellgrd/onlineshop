@@ -4,8 +4,8 @@ import { parseCartToObject } from '../helpers.js';
 const AddressForm = () => {
 
     return(
-        <form>
-            <h3>Shipping</h3>
+        <form className="addressForm">
+            <h3>Shipping details</h3>
             <AddressElement  options={{mode:'shipping'}}  onChange={(e) => {
                 if(e.complete) {
                     const address = e.value.address;

@@ -63,9 +63,10 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
             <div className="cart" >
                 <div className='cart-logo-and-count-box'>
                     <img className='cartlogo' src={cartlogo} />
-                    <p className='cartlogo-count'>{userCartTotalItems}</p>
-                    { userCartTotalItems && <button onClick={handleCheckout} className='cart-checkout-button'>proceed to payment</button>}
+                    <p className='cartlogo-count'> {userCartTotalItems}</p>
                 </div>
+                { userCartTotalItems && <button onClick={handleCheckout} className='cart-checkout-button'>proceed to payment</button>}
+
                 { userCartTotalCost &&  <div className='cart-summary'>
                 <p>total cost: £{userCartTotalCost}</p>
                 </div>}

@@ -14,19 +14,19 @@ const CheckoutForm = () => {
         e.preventDefault();     
         
 
-        // setIsProcessing(true);
-        // const { error } = await stripe.confirmPayment({
-        //     elements,
-        //     confirmParams:{
-        //         return_url: `${window.location.origin}/completion`,
-        //     }
-        // });
+        setIsProcessing(true);
+        const { error } = await stripe.confirmPayment({
+            elements,
+            confirmParams:{
+                return_url: `${window.location.origin}/completion`,
+            }
+        });
 
-        // if (error) {
-        //     setMessage(error.message);
-        //     console.log(error);
-        // };
-        // setIsProcessing(false);
+        if (error) {
+            setMessage(error.message);
+            console.log(error);
+        };
+        setIsProcessing(false);
     }
 
     return(
