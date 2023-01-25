@@ -3,8 +3,11 @@ import UserCart from '../userCart';
 import { useEffect, useState } from 'react';
 import { checkIfCartExists, parseCartToObject  } from '../helpers';
 import uuid from 'react-uuid';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({prodObject, setUserCartChanged}) => {
+
+    const navigate = useNavigate();
 
     const handleAddCart = (prodObject) => {
         let userCart;
@@ -28,14 +31,26 @@ const ProductCard = ({prodObject, setUserCartChanged}) => {
         setUserCartChanged(true);
     }
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        let prodItem = e.target.parentElement;
+        //TODO:  INJECT ITEM DETAILS INTO STATE
+        navigate('/productitem',{state:{itemId:"item id"}});
+    }
+
     return(
         <div className="productCard" key={prodObject.id}>
-            <h4 className="productCard-heading">{prodObject.name}</h4>
-            <img className="productCard-img" src={prodObject.filename} alt={prodObject.filename}/>
-            <p className="productCard-text">{prodObject.description}</p>
-            <p className="productCard-text">{"£" + prodObject.price}</p>
-            <p className="productCard-text">{"qty in stock: " +prodObject.quantity}</p>
+            <div className='productCard-heading-box'>
+                <p className="productCard-heading">{prodObject.name}</p> 
+            </div>
+            <img onClick={(e) => {handleClick(e)}} className="productCard-img" src={prodObject.filename} alt={prodObject.filename}/>
             <button onClick={(e) => {handleAddCart(prodObject)}} className="productCard-button"> add to cart </button>
+            <div className='productCard-text-box'>
+                <p className="productCard-text">{prodObject.description}</p>
+                <p className="productCard-text">{"£" + prodObject.price}</p>
+                <p className="productCard-text">{"qty in stock: " +prodObject.quantity}</p>
+            </div>
+
         </div>
     )
 };

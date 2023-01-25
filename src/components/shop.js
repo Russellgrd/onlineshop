@@ -20,6 +20,7 @@ const Shop = ({setUserCartChanged}) => {
             { products && products.map((prodObject) => {
                 return <ProductCard setUserCartChanged={setUserCartChanged} prodObject={prodObject} key={prodObject.id}/>
             })}
+            
         </div>
     )
 };

@@ -66,7 +66,7 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
                 { userCartTotalItems && <button onClick={handleCheckout} className='cart-checkout-button'>proceed to payment</button>}
 
                 { userCartTotalCost &&  <div className='cart-summary'>
-                <p>total cost: £{userCartTotalCost}</p>
+                <p className='cart-totalcost'>total cost: £{userCartTotalCost}</p>
                 </div>}
                 { userCart && userCart.items.map((item) => {
                     return <CartCard key={uuid()} productObject={item} handleDeleteCartItem={handleDeleteCartItem}/>

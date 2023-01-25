@@ -8,7 +8,7 @@
 :root {
   --light-grey: #F6F9FC;
   --dark-terminal-color: #0A2540;
-  --accent-color: #635BFF;
+  --accent-color: #000000;
   --radius: 3px;
 }
 
@@ -91,57 +91,76 @@ code {
 }
 
 .shop {
-
-  width: 70%;
+  width: 80%;
+  height: 80vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-
+  overflow:scroll;
 }
 
 .productCard{
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content:space-around;
-  width: 50%;
-  height: 60vh;
+  height: 50%;
   text-align: center;
+  margin: 1rem;
+  position: relative;
 }
 
 .productCard-heading{
-
+  font-size: 14px;
+  color: #e1ad21;
 }
+
+.productCard-heading-box{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  top: 10px;
+  height: 1.5rem;
+  width: 80%;
+  background-color: black;
+}
+
 .productCard-img{
-  width: 30%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: 5px;
 }
-.productCard-text{
 
+.productCard-button {
+  width: 70%;
+  bottom: 40px;
 }
+
+.productCard-text-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  
+}
+
+.productCard-text {
+  font-size: 12px;
+}
+
 .productCard-button{
-  width: 30%;
-  height: 3rem;
-  font-size: 1.1rem;
-  border: none;
-  margin-top: .5rem;
-  background-color: rgba(0, 0, 0, 0.791);
-  color: #fff;
-  border: 1px solid black;
+  position: absolute;
+  margin: auto;
 }
 
-.productCard-button:active {
- background-color: rgba(0, 0, 0, 0.561);
+.productCard-text-description {
+  font-size: 12px;
 }
 
-.productCard-button-img{
-  height: 40px;
-  width: 40px;
-}
 
 
 .cart {
@@ -188,25 +207,15 @@ code {
   width: 22px;
   height: 22px;
   font-size: 14px;
-  background-color: rgb(218, 37, 37);
+  background-color: black;
   color: #fff;
 }
 
 .cartcard-img {
-  height: 50px;
-  width: 50px;
+   width: 50%;
 }
 
-.cartcard-btn {
-  text-align: center;
-  border: 1px solid black;
-  background-color: black;
-  color: #fff;
-  text-decoration: none;
-  height: 1.5rem;
-  width: 50%;
-  margin-bottom: 2px; 
-}
+
 
 .cartlogo {
   height: 50px;
@@ -220,7 +229,11 @@ code {
 .cart-checkout-button {
   border: none;
   width: 50%;
-  background-color: rgb(80, 217, 6);
+
+}
+
+.cart-totalcost {
+  color: #e1ad21;
 }
 
 
