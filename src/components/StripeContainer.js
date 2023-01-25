@@ -1,19 +1,38 @@
+import React, { useEffect, useState } from "react"
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import PaymentForm from "./PaymentForm";
+import AddressForm from "./AddressForm";
 
-function StripeContainer({finalSHoppingCart}) {
+const StripeContainer = () => {
 
+    let[sP,setSP] = useState(null);
 
-
-    const PUBLIC_KEY = "pk_test_51Ltxe2FBecIziEZh9jRfsXhXrTjjwc6BSYWGgsDcZNXQO0JswBjb0QFo5u5H6OfddapZN0xr6DNOTs2UsDLkvMuz00ZWIq892R";
-    const stripesTestPromise = loadStripe(PUBLIC_KEY);
+    useEffect(() => {
+        const getPublishableKey = async() => {
+            const resp = await fetch('http://localhost:4242/config');
+            const { publishableKey } = await resp.json();
+            const stripePromise = loadStripe(publishableKey);
+            setSP(stripePromise);
+        }
+        getPublishableKey();
+    },[]);
 
     return(
-        <Elements stripe={stripesTestPromise}>
-            <PaymentForm finalSHoppingCart={finalSHoppingCart} />
+        <>
+        {sP ? <Elements stripe={sP}>
+            <AddressForm />
+            <PaymentForm />
         </Elements>
-        )
-};
+        :
+        <div>
+            <p>loading..</p>
+        </div>
+        }
+        </>
+    );
+
+
+}
 
 export default StripeContainer;

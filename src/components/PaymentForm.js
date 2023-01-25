@@ -1,89 +1,96 @@
 import { useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-
-const CARD_OPTIONS = {
-    // iconStyle:"solid",
-    // style: {
-    //     base: {
-    //         iconColor:"#c4f0ff",
-    //         color:"#fff",
-    //         fontWeight:500,
-    //         fontFamily: "Roboto,Open Sans, Segoe UI, sans-serif",
-    //         fontSize:"16px",
-    //         fontSmoothing:"antialiased",
-    //         ":-webkit-autofill":{ color: "#fce883" },
-    //         "::placeholder":{ color: "#87bbfd" } 
-    //     },
-    //     invalid:{
-    //         iconColor:"#ffc7ee",
-    //         color:"#ffc7ee"
-    //     }
-    // }
-}
+import AddressForm from "./AddressForm";
+import {Elements} from '@stripe/react-stripe-js';
 
 
-function PaymentForm({finalSHoppingCart}) {
+const PaymentForm = () => {
 
-    const [success, setSuccess] = useState(false);
-    const stripe = useStripe();
-    const elements  = useElements();
+    
+ const [success, setSuccess] = useState(false);
+ const stripe = useStripe();
+ const elements = useElements();
 
-    const handleSubmit  = async (e) => {
-        e.preventDefault();
 
-        if(!stripe && !elements) {
-            return;
-        }
+ const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type:'card',
+        card:elements.getElement(CardElement)
+    });
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type:"card",
-            card: elements.getElement(CardElement)
-        })
-
-        if(!error) {
-            try {
-                const { id } = paymentMethod;
-                const responseObj = await fetch("http://localhost:4242/create-checkout-session", {
-                    method:'POST',
-                    headers:{'Content-Type':'application/json'},
-                    body: JSON.stringify({
-                        amount:finalSHoppingCart.totalCost,
-                        id:id
-                    })
+    if(!error) {
+        try{
+            const { id } = paymentMethod;
+            const response = await fetch('http://localhost:4242/create-payment-intent', {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    paymentMethodType:'card',
+                    currency:'eur',
+                    amount:1900
                 })
-                let responseData = await responseObj.json();
-                if(responseData.data.success){
-                    console.log('successful payment ');
-                    setSuccess(true);
-                }
-            } catch(err) {
-                console.log("Error", err);
+            })
+        let data = await response.json();
+        if(data.status === 'success') {
+            // const {error: stripeError, paymentIntent} = await stripe.confirmCardPayment(data.clientSecret, {
+            //     payment_method:{
+            //         card:elements.getElement(CardElement),
+            //         billing_details: {
+            //             name:'russell driver'
+            //         }
+            //     }
+            // })
+            stripe.confirmCardPayment(data.clientSecret, {
+            payment_method: {
+            card: elements.getElement(CardElement),
+                billing_details: {
+                    name: 'Jenny Rosen',
+                },
+            },
+        })
+        .then(function(result) {
+            // Handle result.error or result.paymentIntent
+            if(!result.error) {
+                console.log('successfull payment for Jenny')
+                console.log(result.paymentIntent);
+            } else {
+                console.log('there was an error for Jenny');
+                console.log(result.error)
             }
-        } else {
-            console.log(error.message);
+        });
         }
+        
+        
+        }catch(e) {
+            console.log('error',e)
+        }
+    } else {
+        console.log(error.message);
     }
 
+ }
 
 
-    return (
-       <>
-        {!success ?
-        
+    return(
+        <>
+        { !success ? 
             <form onSubmit={handleSubmit}>
                 <fieldset className="FormGroup">
                     <div className="FormRow">
-                        <CardElement options={CARD_OPTIONS}/>
+                        <CardElement />
                     </div>
                 </fieldset>
                 <button>Pay</button>
             </form>
             : 
             <div>
-                <h2>You Just bought a new product!</h2>
-            </div>           
-        } 
-       </>
+                <h2>Your payment was successful!</h2>
+            </div>
+        }
+        </>
     )
 }
 

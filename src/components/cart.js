@@ -5,8 +5,6 @@ import uuid from 'react-uuid';
 import { removeCartItemAndReload } from '../helpers';
 import cartlogo from '../images/cart.png'
 import { createSearchParams, useNavigate } from 'react-router-dom';
-import { Elements } from "@stripe/react-stripe-js";
-import PaymentForm from './PaymentForm';
 import Cookies from 'universal-cookie';
 
 

@@ -9,7 +9,8 @@ import Home from './components/home';
 import Checkout from './components/checkout';
 import UserLogin from './components/userlogin';
 import CreateAccount from './components/createaccount';
-import Completion from './components/completion';
+import Card from './components/card';
+import Complete from './components/Complete';
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
             <Route path="/login" element={ <UserLogin /> } />
             <Route path="/createaccount" element={ <CreateAccount /> } />
             <Route path='/checkout' element={ <Checkout /> } />
-            <Route path="/completion" element={ <Completion /> } />
+            <Route path='/complete' element={ <Complete /> } />
           </Routes>
       </div>
     </BrowserRouter>
