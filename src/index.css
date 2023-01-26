@@ -26,89 +26,93 @@ code {
     monospace;
 }
 
-
-.App {
-
-}
-
-.home {
-  display: flex;
-  flex-direction: column;
-}
-
-.home-container {
-  display: flex;
-}
-
 .nav {
-    margin-top: .3rem;
-    height: 4rem;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-    box-shadow: 0px 10px 5px -7px rgba(0,0,0,0.35);
+  margin-top: .3rem;
+  height: 10%;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 10px 5px -7px rgba(0,0,0,0.35);
 }
 
 .nav_listContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-content: center;
-    list-style: none;
-    text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  list-style: none;
+  text-align: center;
 }
 
 .nav_listContainer-item {
-    text-decoration: none;
-    margin: auto;
+  text-decoration: none;
+  margin: auto;
+}
+
+.nav-logo {
+color: #e1ad21 !important;
 }
 
 .nav_listContainer-email {
-  outline: 1px solid black;
-  padding: .4rem;
-  border-radius: 3px;
-  background-color: black;
-  color: #fff;
+outline: 1px solid black;
+padding: .4rem;
+border-radius: 3px;
+background-color: black;
+color: #fff;
 }
 
 .nav_listContainer-item > a {
-    color: black;
-    text-decoration: none;
-    font-size: 1rem;
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
 }
 
 .nav-listContainer-logoff {
-  color: #d95300 !important;
+color: #d95300 !important;
 }
 
 .logo {
-    height: 50px;
-    width: 50px;
+  height: 50px;
+  width: 50px;
+}
 
+
+.App {
+  height: 100vh;
+  width: 100vw;
+}
+
+.home {
+  height: 100vh;
+  width: 100vw;
+}
+
+
+.home-container {
+  display: flex;
+  height: 80%;
 }
 
 .shop {
   width: 80%;
-  height: 80vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  overflow:scroll;
+  height: 100%;
+  overflow: scroll;
 }
 
 .productCard{
   display: flex;
   flex-direction: column;
+  width: 30%;
+  min-width: 200px;
+  height: 70%;
   align-items: center;
-  justify-content:space-around;
-  height: 50%;
-  text-align: center;
   margin: 1rem;
-  position: relative;
 }
 
 .productCard-heading{
@@ -117,20 +121,18 @@ code {
 }
 
 .productCard-heading-box{
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  top: 10px;
-  height: 1.5rem;
-  width: 80%;
+  height: 2rem;
+  width: 100%;
   background-color: black;
+  transform: translateY(3px);
 }
 
 .productCard-img{
   width: 100%;
-  height: 100%;
+  height: 60%;
   object-fit: cover;
   object-position: center;
   border-radius: 5px;
@@ -138,14 +140,13 @@ code {
 
 .productCard-button {
   width: 70%;
-  bottom: 40px;
 }
 
 .productCard-text-box {
   display: flex;
   flex-direction: column;
   width: 100%;
-  
+  text-align: center;
 }
 
 .productCard-text {
@@ -153,13 +154,29 @@ code {
 }
 
 .productCard-button{
-  position: absolute;
   margin: auto;
 }
 
 .productCard-text-description {
   font-size: 12px;
 }
+
+.productCard-itemID {
+  display: none;
+}
+
+
+.productItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80vw;
+  outline: 2px solid orange;
+  margin: auto;
+  text-align: center;
+}
+
 
 
 
@@ -177,8 +194,12 @@ code {
   flex-direction: column;
   align-items: center;
   width: 50%;
-  margin: .2rem;
   animation: 1s fadeIn;
+  flex-direction: column;
+  min-width: 200px;
+  height: 70%;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 @keyframes fadeIn {
@@ -207,7 +228,7 @@ code {
   width: 22px;
   height: 22px;
   font-size: 14px;
-  background-color: black;
+  background-color: #e1ad21;
   color: #fff;
 }
 
@@ -223,7 +244,7 @@ code {
 }
 
 .cart-summary {
-
+  margin: 1rem;
 }
 
 .cart-checkout-button {
@@ -236,7 +257,10 @@ code {
   color: #e1ad21;
 }
 
-
+.cartcard-btn {
+  text-decoration: none;
+  color: #e1a95f;
+}
 
 
 .checkout-products-container {
@@ -248,6 +272,17 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.checkout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-heading {
+  color: #e1ad21 !important;
 }
 
 .userlogin-form {
@@ -344,4 +379,22 @@ fieldset, input, select {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.footer {
+  width: 100vw;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.footer-btn {
+  list-style: none;
+  margin: 1rem;
+} 
+
+.footer-btn > a {
+  text-decoration: none;
 }

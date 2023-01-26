@@ -29,8 +29,8 @@ const Nav = () => {
     return(
         <div className="nav">
             <ul className="nav_listContainer">
-                <li className="nav_listContainer-item">
-                    <Link to="/"> Viral Aces</Link>
+                <li className="nav_listContainer-item nav-logo">
+                    <Link to="/" className='nav-logo'> Viral Aces</Link>
                 </li>
                 <li className="nav_listContainer-item">
                     <Link to="/about">about</Link>

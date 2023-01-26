@@ -36,7 +36,7 @@ const Checkout = () => {
 
     return(
         <div className='checkout'>
-            <h1>checkout</h1>
+            <h1 className='checkout-heading'>checkout</h1>
             <p>total to pay £{location.state.userCart.totalCost}</p>
             <Link className='checkout-btn' to="/">back to basket</Link>
             {clientSecret && (

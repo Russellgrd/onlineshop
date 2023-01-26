@@ -31,11 +31,15 @@ const ProductCard = ({prodObject, setUserCartChanged}) => {
         setUserCartChanged(true);
     }
 
-    const handleClick = (e) => {
+    const handleClick = async (e, prodId) => {
         e.preventDefault();
-        let prodItem = e.target.parentElement;
+        console.log(prodId);
+        let resp = await fetch('http://localhost:4242/item-description' + prodId );
+        let data = await resp.json();
+
+        console.log(data);
         //TODO:  INJECT ITEM DETAILS INTO STATE
-        navigate('/productitem',{state:{itemId:"item id"}});
+        navigate('/productitem',{state:{data:data}});
     }
 
     return(
@@ -43,14 +47,13 @@ const ProductCard = ({prodObject, setUserCartChanged}) => {
             <div className='productCard-heading-box'>
                 <p className="productCard-heading">{prodObject.name}</p> 
             </div>
-            <img onClick={(e) => {handleClick(e)}} className="productCard-img" src={prodObject.filename} alt={prodObject.filename}/>
+            <img onClick={(e) => {handleClick(e, prodObject.id)}} className="productCard-img" src={prodObject.filename} alt={prodObject.filename}/>
             <button onClick={(e) => {handleAddCart(prodObject)}} className="productCard-button"> add to cart </button>
             <div className='productCard-text-box'>
                 <p className="productCard-text">{prodObject.description}</p>
                 <p className="productCard-text">{"£" + prodObject.price}</p>
                 <p className="productCard-text">{"qty in stock: " +prodObject.quantity}</p>
             </div>
-
         </div>
     )
 };

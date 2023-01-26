@@ -44,16 +44,16 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
     const navigate = useNavigate();
 
     const handleCheckout = () => {
-        let useremail = cookies.get('useremail');
-            if(!useremail) {
-                navigate('/login');
-            } else {
+        // let useremail = cookies.get('useremail');
+        //     if(!useremail) {
+        //         navigate('/login');
+        //     } else {
                 userCart.orderId = uuid();
                 userCart.date = new Date().toLocaleDateString();
                 userCart.time = new Date().toLocaleTimeString();
                 localStorage.setItem('userCart', JSON.stringify(userCart));
                 navigate('/checkout',{state:{userCart}});
-            }
+            
         }
     
 
