@@ -13,10 +13,10 @@ const ProductItem = () => {
     return(
         <div className="productItem">
             <button onClick={handleClick}>back</button>
-            <h1>{item.description}</h1>
-            <p>{item.full_description}</p>
-            <p>{item.price}</p>
-            <img src={item.filename} />
+            <h1 className="procuctItem-heading">{item.description}</h1>
+            <p className="productItem-description">{item.full_description}</p>
+            <p className="productItem-price">price: £{item.price}</p>
+            <img className="productItem-image" src={item.filename} />
         </div>
     )
 };
