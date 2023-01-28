@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import logo from '../images/logo.png'
+import whitelogo from '../images/whitelogo.png'
 import cart from '../images/cart.png';
 import Cookies from 'universal-cookie';
 
@@ -30,13 +30,13 @@ const Nav = () => {
         <div className="nav">
             <ul className="nav_listContainer">
                 <li className="nav_listContainer-item nav-logo">
-                    <Link to="/" className='nav-logo'> Viral Aces</Link>
+                    <Link to="/" > <img className='nav-logo' src={whitelogo} /></Link>
                 </li>
                 <li className="nav_listContainer-item">
-                    <Link to="/about">about</Link>
+                    <Link className='nav_listContainer-link' to="/about">About</Link>
                 </li>
                 <li className="nav_listContainer-item">
-                    <Link to="/contact">contact</Link>
+                    <Link className='nav_listContainer-link' to="/contact">Contact</Link>
                 </li>
                 {/* <li className="nav_listContainer-item">
                 { useremail ? <Link className='nav-listContainer-logoff' onClick={handleLogOff} to="#">log off</Link> : <Link to="/login">log in</Link>  }

@@ -19,7 +19,10 @@ const Checkout = () => {
         fetch("http://localhost:4242/create-payment-intent", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ items: [location.state.userCart], amount:location.state.userCart.totalCost }),
+          body: JSON.stringify({ 
+            items: [location.state.userCart], 
+            amount:location.state.userCart.totalCost,
+          }),
         })
           .then((res) => res.json())
           .then((data) => setClientSecret(data.clientSecret));

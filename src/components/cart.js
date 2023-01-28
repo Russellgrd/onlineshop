@@ -11,9 +11,10 @@ import Cookies from 'universal-cookie';
 
 const Cart = ({setUserCartChanged,userCartChanged}) => {
 
+    //NOTE - ORIGINALLY SET state to 0 for userCartTotalCost and userCartTtotalItems - now set to NUll.
     let [userCart, setUserCart] = useState(null);
-    let [userCartTotalCost, setUserCartTotalCost] = useState(0);
-    let [userCartTotalItems, setUserCartTotalItems] = useState(0);
+    let [userCartTotalCost, setUserCartTotalCost] = useState(null);
+    let [userCartTotalItems, setUserCartTotalItems] = useState(null);
 
     let cookies = new Cookies();
 
