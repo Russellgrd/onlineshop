@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { parseCartToObject  } from '../helpers'
 import {
   PaymentElement,
   LinkAuthenticationElement,
@@ -18,10 +19,12 @@ export default function CheckoutForm() {
     if (!stripe) {
       return;
     }
+  
 
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     );
+  
 
     if (!clientSecret) {
       return;
@@ -47,15 +50,23 @@ export default function CheckoutForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log('E',e);
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-  
+    
+
 
     setIsLoading(true);
+    let finalCart = parseCartToObject();
+    finalCart.userEmail = email;
+    localStorage.setItem('userCart',JSON.stringify(finalCart));
+    console.log('cart updated with final items');
+
+    let fullname = document.getElementById('Field-nameInput');
+    console.log('FULL NAME',fullname);
 
     const { error } = await stripe.confirmPayment({
       elements,
@@ -64,7 +75,7 @@ export default function CheckoutForm() {
         return_url: "http://localhost:3000/complete",
       },
     });
-
+    
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
@@ -85,10 +96,10 @@ export default function CheckoutForm() {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <LinkAuthenticationElement
+      {/* <LinkAuthenticationElement
         id="link-authentication-element"
         onChange={(e) => setEmail(e.target.value)}
-      />
+      /> */}
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
