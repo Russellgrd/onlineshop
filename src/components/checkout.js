@@ -15,6 +15,7 @@ const Checkout = () => {
 
     const stripePromise = loadStripe('pk_test_51Ltxe2FBecIziEZh9jRfsXhXrTjjwc6BSYWGgsDcZNXQO0JswBjb0QFo5u5H6OfddapZN0xr6DNOTs2UsDLkvMuz00ZWIq892R');
     const [clientSecret, setClientSecret] = useState("");
+    const [loaded, setLoaded] = useState(false);
 
 
     useEffect(() => {
@@ -28,8 +29,11 @@ const Checkout = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            setClientSecret(data.clientSecret)
-          });
+            setClientSecret(data.clientSecret) 
+          })
+          .catch((err) => {
+            console.log('error', err);
+          })
       }, []);
 
     return(
@@ -38,22 +42,24 @@ const Checkout = () => {
             <p>total to pay £{location.state.userCart.totalCost}</p>
             <Link className='checkout-btn' to="/">back to basket</Link>
             {clientSecret && (
+
               <Elements 
               options={{appearance:{theme:'stripe'},clientSecret:clientSecret}} stripe={stripePromise}>
-                    <AddressElement 
-                    options={{mode: 'shipping'}} 
-                    onChange={(event) => {
+                {  // SetTimeout used to fix a bug as onChange event on AddressElement does not fire unelss some state changes
+                setTimeout(() => {
+                  setLoaded(true);
+                },500)
+                }
+                    <AddressElement options={{mode: 'shipping'}} 
+                    onChange={(event) => {  
+                      console.log('ADDRESS', event.value.address);
                       if (event.complete) {
-                        console.log('complete');
-                        // Extract potentially complete address
-                        const address = event.value
                         let finalCart = parseCartToObject();
-                        finalCart.username = address.name;
-                        finalCart.address = address.address;
+                        finalCart.username = event.value.name;
+                        finalCart.address = event.value.address;
                         localStorage.setItem('userCart',JSON.stringify(finalCart));
-                        console.log('address and name added to cart');
+                        console.log('address and name added to cart'); 
                       }
-
                     }}
                     />
                     <CheckoutForm />

@@ -41,8 +41,8 @@ code {
 }
 
 .nav-logo {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 }
 
 .nav_listContainer-link {
@@ -96,7 +96,7 @@ color: #d95300 !important;
 
 
 .App {
-  height: 100vh;
+  height: auto;
   width: 100vw;
   background-color: #F6F9F0;
 }
@@ -110,6 +110,41 @@ color: #d95300 !important;
 .home-container {
   display: flex;
   height: 80%;
+}
+
+@media only screen and (max-width: 800px) {
+
+ 
+
+  .shop {
+    max-width: 50vw;
+  }
+
+  .cart {
+    width: 50vw !important;
+  }
+
+  .productItem-card {
+    flex-direction: column;
+  }
+
+  .cart-checkout-button {
+    font-size: 10px;
+    width: 50vw;
+  }
+
+  .productCard {
+    height: 90% !important;
+    margin-left: 5px;
+    margin-right: 0 !important;
+  }
+
+  .productCard-img {
+    border-radius: 10px;
+    
+  }
+
+
 }
 
 .shop {
@@ -482,6 +517,24 @@ fieldset, input, select {
   cursor: pointer;
   transition: all 0.2s ease;
   display: block;
+}
+
+.about {
+  height: 100vh;
+  width: 100vw;
+
+}
+
+.about-text {
+  max-width: 75ch;
+}
+
+.about-imagesbox {
+  
+}
+
+.about-imagesbox-img {
+
 }
 
 .footer {

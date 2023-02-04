@@ -1,37 +1,52 @@
-
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import check from '../images/check.png'
 import { useParams } from 'react-router-dom';
 
 const Complete = () => {
 
-//payment_intent=pi_3MVqTCFBecIziEZh1EY643cc&payment_intent_client_secret=pi_3MVqTCFBecIziEZh1EY643cc_secret_YagirPPulL6X3auZu4T7Uv9V0&redirect_status=succeeded
+    let [message, setMessage] = useState(null);
 
- 
-
-    const clearCart = async () => {
-
+    useEffect(() => {
+        console.log('use effect ran' + Math.random());
         let finalCart = localStorage.getItem('userCart');
-        console.log('FINAL CART', JSON.stringify(finalCart));
-        let resp = await fetch('http://localhost:4242/purchasecomplete', {
+        fetch('http://localhost:4242/purchasecomplete', {
             method:'POST',
             headers: {
                 'Content-Type':'application/json'
             },
             body:finalCart
-        });
-        let data = await resp.json();
-    }
+        })
+        .then(resp => resp.json())
+        .then((data) => {    
+            console.log(data)
+            setMessage(data.message);
+            console.log('clearing storage');
+            localStorage.removeItem('userCart');
+            let checkCartRemoved = localStorage.getItem('userCart');
+            if(!checkCartRemoved) {
+                console.log('storage successfully cleared')
+            } else {
+                console.log('storage not removed');
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            setMessage(err.message);
+        })
+    },[]);
 
-    clearCart();
+
+ 
 
     return(
         <div className="complete">
             <li className='complete-listItem'>
                 <Link className='complete-listItem-btn' to="/">Back home</Link>
             </li>
-            <h1>Your payment has been successfull</h1>
+            { message &&  <h1>{message}</h1>}
             <p>please check your email for full payment details</p>
+            <p>do not refresh this page</p>
             <img className='complete-check-icon' src={check} />
         </div>
     )

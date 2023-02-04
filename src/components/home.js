@@ -22,7 +22,6 @@ const Home = () => {
             <div className="home-container">
                 <Shop setUserCartChanged={setUserCartChanged} userCartChanged={userCartChanged}/>
                 <Cart setUserCartChanged={setUserCartChanged} userCartChanged={userCartChanged}/>
-                
             </div>
             <Footer />
         </div>
