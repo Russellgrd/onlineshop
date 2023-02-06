@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import check from '../images/check.png'
 import { useParams } from 'react-router-dom';
+import { parseCartToObject } from '../helpers';
 
 const Complete = () => {
 
     let [message, setMessage] = useState(null);
+    let [userName,setUserName] = useState(null);
 
     useEffect(() => {
         console.log('use effect ran' + Math.random());
@@ -20,6 +22,9 @@ const Complete = () => {
         .then(resp => resp.json())
         .then((data) => {    
             console.log(data)
+            let localStorageCart = parseCartToObject();
+            console.log(localStorageCart.username);
+            setUserName(localStorageCart.username);
             setMessage(data.message);
             console.log('clearing storage');
             localStorage.removeItem('userCart');
@@ -44,7 +49,7 @@ const Complete = () => {
             <li className='complete-listItem'>
                 <Link className='complete-listItem-btn' to="/">Back home</Link>
             </li>
-            { message &&  <h1>{message}</h1>}
+            { message &&  <h1> Thankyou{' ' + userName + ' ' + message}</h1>}
             <p>please check your email for full payment details</p>
             <p>do not refresh this page</p>
             <img className='complete-check-icon' src={check} />
