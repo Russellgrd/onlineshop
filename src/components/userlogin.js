@@ -15,7 +15,7 @@ const UserLogin = () => {
         e.preventDefault();
         let validEmail = validateEmail.test(email);
         if( validEmail && password.length > 5 ){
-            let respObj = await fetch('http://localhost:4242/userlogin', {
+            let respObj = await fetch('https://onlineshop-backend.herokuapp.com/userlogin', {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'

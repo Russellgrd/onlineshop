@@ -10,7 +10,7 @@ const StripeContainer = () => {
 
     useEffect(() => {
         const getPublishableKey = async() => {
-            const resp = await fetch('http://localhost:4242/config');
+            const resp = await fetch('https://onlineshop-backend.herokuapp.com/config');
             const { publishableKey } = await resp.json();
             const stripePromise = loadStripe(publishableKey);
             setSP(stripePromise);

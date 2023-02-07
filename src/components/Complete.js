@@ -12,7 +12,7 @@ const Complete = () => {
     useEffect(() => {
         console.log('use effect ran' + Math.random());
         let finalCart = localStorage.getItem('userCart');
-        fetch('http://localhost:4242/purchasecomplete', {
+        fetch('https://onlineshop-backend.herokuapp.com/purchasecomplete', {
             method:'POST',
             headers: {
                 'Content-Type':'application/json'

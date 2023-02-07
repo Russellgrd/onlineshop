@@ -34,7 +34,7 @@ const ProductCard = ({prodObject, setUserCartChanged}) => {
     const handleClick = async (e, prodId) => {
         e.preventDefault();
         console.log(prodId);
-        let resp = await fetch('http://localhost:4242/item-description' + prodId );
+        let resp = await fetch('https://onlineshop-backend.herokuapp.com/item-description' + prodId );
         let data = await resp.json();
 
         console.log(data);

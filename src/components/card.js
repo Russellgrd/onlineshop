@@ -18,7 +18,7 @@
 //         }
 //         addMessage('Creating payment intent...');
 //         //create payment intent
-//         const {error:backendError, clientSecret } = await fetch('http://localhost:4242/create-payment-intent', {
+//         const {error:backendError, clientSecret } = await fetch('https://onlineshop-backend.herokuapp.com//create-payment-intent', {
 //             method:'POST',
 //             headers:{
 //                 'Content-Type':'application/json'

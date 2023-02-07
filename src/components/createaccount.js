@@ -41,7 +41,7 @@ const CreateAccount = () => {
 
 
         if(!validaterArray.includes(false)) {
-            let resp = await fetch('http://localhost:4242/createnewuser', {
+            let resp = await fetch('https://onlineshop-backend.herokuapp.com/createnewuser', {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'

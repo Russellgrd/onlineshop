@@ -22,7 +22,7 @@ const PaymentForm = () => {
     if(!error) {
         try{
             const { id } = paymentMethod;
-            const response = await fetch('http://localhost:4242/create-payment-intent', {
+            const response = await fetch('https://onlineshop-backend.herokuapp.com/create-payment-intent', {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'

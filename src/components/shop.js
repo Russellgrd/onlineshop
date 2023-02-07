@@ -5,13 +5,17 @@ const Shop = ({setUserCartChanged}) => {
 
     let [ products, setProducts ] = useState(null);
     const getProducts = async (url) => {
-        let resp = await fetch(url);
-        let data = await resp.json();
-         setProducts(data);
+        try {
+            let resp = await fetch(url);
+            let data = await resp.json();
+            setProducts(data);
+        } catch(err) {
+            console.log('unable to connect to SQL database');
+        }
      }
 
     useEffect(() => {
-        getProducts('http://localhost:4242/getproducts');
+        getProducts('https://onlineshop-backend.herokuapp.com/getproducts');
     },[]);
 
 
