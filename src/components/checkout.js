@@ -9,13 +9,13 @@ import { parseCartToObject } from '../helpers';
 
 
 
-const Checkout = () => {
-
-    const location = useLocation();
-
-    const stripePromise = loadStripe('pk_test_51Ltxe2FBecIziEZh9jRfsXhXrTjjwc6BSYWGgsDcZNXQO0JswBjb0QFo5u5H6OfddapZN0xr6DNOTs2UsDLkvMuz00ZWIq892R');
+const Checkout = () => { 
+  
     const [clientSecret, setClientSecret] = useState("");
     const [loaded, setLoaded] = useState(false);
+    const location = useLocation();
+    const [pubKey, setPubKey] = useState(null);
+    const stripePromise = loadStripe('pk_test_51Ltxe2FBecIziEZh9jRfsXhXrTjjwc6BSYWGgsDcZNXQO0JswBjb0QFo5u5H6OfddapZN0xr6DNOTs2UsDLkvMuz00ZWIq892R');
 
 
     useEffect(() => {
@@ -29,10 +29,10 @@ const Checkout = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            setClientSecret(data.clientSecret) 
+            setClientSecret(data.clientSecret);
           })
           .catch((err) => {
-            console.log('error', err);
+            console.log('Russell error', err);
           })
       }, []);
 
