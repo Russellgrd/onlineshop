@@ -12,6 +12,7 @@ import CreateAccount from './components/createaccount';
 import Card from './components/card';
 import Complete from './components/Complete';
 import ProductItem from './components/ProductItem';
+import Contact from './components/Contact';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
             <Route path='/checkout' element={ <Checkout /> } />
             <Route path='/complete' element={ <Complete /> } />
             <Route path='/productitem' element={ <ProductItem /> } />
+            <Route path="/contact" element={ <Contact /> } />
           </Routes>
       </div>
     </BrowserRouter>

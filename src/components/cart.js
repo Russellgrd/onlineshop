@@ -36,6 +36,14 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
         setUserCartChanged(true)
     },[userCartChanged]);
 
+    useEffect(() => {
+        if(userCartTotalCost === 0) {
+            setUserCartTotalCost(null);
+            setUserCartTotalItems(null);
+            console.log('converting to null ran');
+        }
+    },[userCartTotalItems])
+
     const handleDeleteCartItem = (e) => {
         let itemId = e.parentElement.dataset.cartitemid;
         removeCartItemAndReload(itemId);
@@ -72,7 +80,6 @@ const Cart = ({setUserCartChanged,userCartChanged}) => {
                 { userCart && userCart.items.map((item) => {
                     return <CartCard key={uuid()} productObject={item} handleDeleteCartItem={handleDeleteCartItem}/>
                 })}
-                
             </div>
     )
 }

@@ -32,17 +32,16 @@ const Checkout = () => {
             setClientSecret(data.clientSecret);
           })
           .catch((err) => {
-            console.log('Russell error', err);
+            console.log(err);
           })
       }, []);
 
     return(
         <div className='checkout'>
             <h1 className='checkout-heading'>checkout</h1>
-            <p>total to pay £{location.state.userCart.totalCost}</p>
             <Link className='checkout-btn' to="/">back to basket</Link>
+            <p className='checkout-total'>total to pay <span className='checkout-total-figure'>£{location.state.userCart.totalCost}</span></p>
             {clientSecret && (
-
               <Elements 
               options={{appearance:{theme:'stripe'},clientSecret:clientSecret}} stripe={stripePromise}>
                 {  // SetTimeout used to fix a bug as onChange event on AddressElement does not fire unelss some state changes
@@ -52,7 +51,6 @@ const Checkout = () => {
                 }
                     <AddressElement options={{mode: 'shipping'}} 
                     onChange={(event) => {  
-                      console.log('ADDRESS', event.value.address);
                       if (event.complete) {
                         let finalCart = parseCartToObject();
                         finalCart.username = event.value.name;

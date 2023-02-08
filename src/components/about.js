@@ -21,7 +21,7 @@ We are constantly looking to grow our brand and add more choice to our products,
                 <img className="about-imagesbox-img" />
                 <img className="about-imagesbox-img" />
             </div>
-            <footer />
+            <Footer />
         </div>
     )
 };
